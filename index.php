@@ -86,28 +86,18 @@
 
 
 
-    <section action="#" method="get" class="search">
+    <section class="search">
         <h2>Find Your Dream Job</h2>
-        <form class="form-inline">
-            <div class="form-group mb-2">
-                <input type="text" name="keywords" placeholder="Keywords">
-
-
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" name="location" placeholder="Location">
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" name="company" placeholder="Company">
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">Search</button>
-        </form>
+        <div class="form-group mb-2">
+            <input type="text" id="titre" placeholder="Search By Title">
+        </div>
+        <button class="btn btn-primary mb-2" onclick="search()">Search</button>
     </section>
 
     <!--------------------------  card  --------------------->
     <section class="light">
         <h2 class="text-center py-3">Latest Job Listings</h2>
-        <div class="container py-2">
+        <div class="container py-2" id="MyDives">
 
             <?php while($row = mysqli_fetch_assoc($result) ){?>
             <article class="postcard light green">
@@ -147,6 +137,7 @@
         <p>© 2023 JobEase </p>
     </footer>
 </body>
+<script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
