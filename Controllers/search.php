@@ -1,5 +1,5 @@
 <?php
- include("database/connection.php");
+ include("../database/connection.php");
  $connection = new Connection();
  $conn = $connection->conn;
  
@@ -32,7 +32,7 @@ if(isset($_GET['titre']) || isset($GET['paye']) ){
 <?php while($row = mysqli_fetch_assoc($result) ){?>
 <article class="postcard light green">
     <a class="postcard__img_link" href="#">
-        <img class="postcard__img" src="uploads/<?php echo $row['image']?>" alt="Image Title" />
+        <img class="postcard__img" src="../uploads/<?php echo $row['image']?>" alt="Image Title" />
     </a>
     <div class="postcard__text t-dark">
         <h3 class="postcard__title green"><a href="#"><?php echo $row['titre']?></a></h3>
@@ -51,7 +51,6 @@ if(isset($_GET['titre']) || isset($GET['paye']) ){
         </ul>
     </div>
 </article>
-
 
 <?php
     }

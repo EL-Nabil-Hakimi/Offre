@@ -32,6 +32,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+
 </head>
 
 <body>
@@ -88,10 +89,15 @@
 
     <section class="search">
         <h2>Find Your Dream Job</h2>
-        <div class="form-group mb-2">
-            <input type="text" id="titre" placeholder="Search By Title">
+        <div style="display : flex ; justify-content :center">
+            <div class="form-group mb-2">
+                <input type="text" id="titre" placeholder="Search By Title">
+            </div>
+            <div class="form-group mb-2">
+                <input type="text" id="paye" placeholder="Search By Company">
+            </div>
+            <button class="btn btn-primary mb-2" onclick="search()">Search</button>
         </div>
-        <button class="btn btn-primary mb-2" onclick="search()">Search</button>
     </section>
 
     <!--------------------------  card  --------------------->
@@ -137,7 +143,7 @@
         <p>© 2023 JobEase </p>
     </footer>
 </body>
-<script src="script.js"></script>
+<script src="search.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

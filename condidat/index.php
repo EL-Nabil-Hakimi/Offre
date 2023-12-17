@@ -117,21 +117,22 @@
 
 
 
-    <section action="#" method="get" class="search">
+    <section class="search">
         <h2>Find Your Dream Job</h2>
-        <form class="form-inline" action="recherche.php" method="post">
+        <div style="display : flex ; justify-content :center">
             <div class="form-group mb-2">
-                <input type="text" name="titre" placeholder="Keywords">
+                <input type="text" id="titre" placeholder="Search By Title">
             </div>
-
-            <button type="submit" name="input" class="btn btn-primary mb-2">Search</button>
-        </form>
-
+            <div class="form-group mb-2">
+                <input type="text" id="paye" placeholder="Search By Company">
+            </div>
+            <button class="btn btn-primary mb-2" onclick="search2()">Search</button>
+        </div>
     </section>
 
     <section class="light">
         <h2 class="text-center py-3">Latest Job Listings</h2>
-        <div class="container py-2">
+        <div class="container py-2" id="MyDives">
 
             <?php while($row = mysqli_fetch_assoc($result) ){?>
             <article class="postcard light green">
@@ -175,5 +176,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../search.js"></script>
+
 
 </html>

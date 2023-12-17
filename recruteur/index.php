@@ -100,29 +100,22 @@
 
 
 
-    <section action="#" method="get" class="search">
+    <section class="search">
         <h2>Find Your Dream Job</h2>
-        <form class="form-inline">
+        <div style="display : flex ; justify-content :center">
             <div class="form-group mb-2">
-                <input type="text" name="keywords" placeholder="Keywords">
-
-
+                <input type="text" id="titre" placeholder="Search By Title">
             </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" name="location" placeholder="Location">
+            <div class="form-group mb-2">
+                <input type="text" id="paye" placeholder="Search By Company">
             </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" name="company" placeholder="Company">
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">Search</button>
-        </form>
-        <a href="add_page.php"><button type="submit" class="btn btn-primary mb-2">Ajouter Des Offres</button></a>
-
+            <button class="btn btn-primary mb-2" onclick="search2()">Search</button>
+        </div>
     </section>
 
     <section class="light">
         <h2 class="text-center py-3">Latest Job Listings</h2>
-        <div class="container py-2">
+        <div class="container py-2" id="MyDives">
 
             <?php while($row = mysqli_fetch_assoc($result) ){?>
             <article class="postcard light green">
@@ -165,5 +158,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../search.js"></script>
 
 </html>
