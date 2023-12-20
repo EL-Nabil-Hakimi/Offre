@@ -5,7 +5,7 @@ use App\Models\Database;
    $database = Database::getInstance();
   $conn = $database->getConnection();
   
-  $sql = "SELECT * FROM offre";
+  $sql = "SELECT * FROM offre ORDER BY id DESC" ;
   $result = mysqli_query($conn, $sql);
   
 ?>

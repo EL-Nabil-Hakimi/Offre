@@ -73,7 +73,7 @@ else{
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="?route=dachboard">Home</a>
+                            <a class="nav-link" href="?route=dashboard">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="?route=dashboard">Dashboard</a>

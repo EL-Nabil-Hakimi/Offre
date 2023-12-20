@@ -13,9 +13,24 @@ $conn = $connexion->getConnection();
         header("Location:?route=login");
     }
 
-    $Condidat = "SELECT COUNT(*) cnt FROM user WHERE role_id = 2 ";
+    $Condidat = "SELECT COUNT(*) cnt FROM `status` 
+                INNER JOIN user ON user.id = status.userid 
+                INNER JOIN offre ON offre.id = status.offreid
+                WHERE status.approved=1 AND offre.user_id = $iduser;";
+
     $result1 = mysqli_query($conn, $Condidat);
     $rowCandidat = mysqli_fetch_array($result1);
+
+
+
+    $Condidat1 = "SELECT COUNT(*) cnt FROM `status` 
+                INNER JOIN user ON user.id = status.userid 
+                INNER JOIN offre ON offre.id = status.offreid
+                WHERE status.approved= -1 AND offre.user_id = $iduser;";
+
+    $result3 = mysqli_query($conn, $Condidat1);
+    $rowCandidat1 = mysqli_fetch_array($result3);
+
     
     $offre = "SELECT COUNT(*) cnt FROM offre WHERE user_id = $iduser";
     $result2 = mysqli_query($conn, $offre);
@@ -158,7 +173,7 @@ $conn = $connexion->getConnection();
                                     <div>
                                         <p class="mb-0">Active Candidat</p>
                                         <div class="mt-4">
-                                            <h3><strong>132</strong></h3>
+                                            <h3><strong><?= $rowCandidat['cnt'] ?></strong></h3>
 
                                         </div>
                                     </div>
@@ -177,7 +192,7 @@ $conn = $connexion->getConnection();
                                     <div>
                                         <p class="mb-0">Inactive Candidat</p>
                                         <div class="mt-4">
-                                            <h3><strong>12</strong></h3>
+                                            <h3><strong><?= $rowCandidat1['cnt'] ?></strong></h3>
                                             <!-- <p><strong></strong> Completed</p> -->
                                         </div>
                                     </div>
@@ -217,7 +232,7 @@ $conn = $connexion->getConnection();
                         <div class="col-xl-8 col-md-12 col-sm-12 col-12 p-4 ">
                             <div>
                                 <h4>Today’s trends</h4>
-                                <p>as of 27 oct 2023, 22:48 PM</p>
+                                <p>as of 22 dec 2023, 22:48 PM</p>
                             </div>
                             <div class="w-100" id="chart">
                             </div>

@@ -15,11 +15,11 @@ use App\Models\Database;
 
   if(isset($_GET['titre'])){
     $titre = $_GET["titre"];
-    $sql = "SELECT * FROM offre WHERE titre LIKE '%$titre%'";
+    $sql = "SELECT * FROM offre WHERE titre LIKE '%$titre%' ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
   }
   else{
-  $sql = "SELECT * FROM offre";
+  $sql = "SELECT * FROM offre ORDER BY id DESC";
   $result = mysqli_query($conn, $sql);}
 
 

@@ -15,7 +15,7 @@ else{
   
   $sql = "SELECT * FROM user 
   INNER JOIN offre ON offre.user_id = user.id
-  WHERE user.id = $iduser ;";
+  WHERE user.id = $iduser ORDER BY offre.id DESC;";
   
   $result = mysqli_query($conn, $sql);
   
