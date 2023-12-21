@@ -63,6 +63,7 @@ switch ($route) {
         $controller = new HomeController();
         $controller->Candidat_notification();    
         break;
+
         // Add mor
     // Add more cases for other routes as needed
     default:

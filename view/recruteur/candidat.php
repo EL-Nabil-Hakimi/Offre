@@ -1,5 +1,7 @@
 <?php
+
 use App\Models\Database;
+use PHPMailer\PHPMailer\PHPMailer;
 
 $connexion = Database::getInstance();
 $conn = $connexion->getConnection();
@@ -8,6 +10,7 @@ $conn = $connexion->getConnection();
 session_start();
 if(isset($_SESSION["iduser"])){    
   $iduser = $_SESSION["iduser"];
+  
 }
 else{
   header("Location:?route=login");
@@ -19,14 +22,45 @@ $sql = "SELECT status.id idstatus, user.name name , user.email email , offre.tit
 INNER JOIN status ON status.userid = user.id
 INNER JOIN offre ON status.offreid = offre.id AND offre.user_id = $iduser;";
 $result = mysqli_query($conn, $sql);
+if(isset($_GET["msg"])){
+    echo '<script>alert("Accepted Successfully")</script>';
+
+}
+
+if(isset($_GET['accept']) && isset($_GET['email']) && isset($_GET['name']) ){
+
+    $name = $_GET['name'];
+    $email = $_GET['email'];
+    $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'nabilelhakimi2023@gmail.com';
+            $mail->Password = 'rsrz cjob zdov bgev';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->setFrom('nabilelhakimi2023@gmail.com', 'Nabil El Hakimi');
+            $mail->addAddress($email);          
+            $mail->isHTML(true);
+            $mail->Subject = 'Congratulation Vous Avez Accepter Chez Nous';
+            $mail->Body=file_get_contents("message.php");
+
+            $mail->send();
+
+            $acceptuser = $_GET['accept'];
+
+            $sql1 = "UPDATE `status` SET `approved`= 1,`notification`= 1 WHERE id = '$acceptuser'";
+
+            $result1 = mysqli_query($conn, $sql1);
+
+            header("location:?route=candidat&msg=Successfully");
+
+            } catch (Exception $e) {
+            echo "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
+        }
 
 
-if(isset($_GET['accept'])){
-    $acceptuser = $_GET['accept'];
-    $sql1 = "UPDATE `status` SET `approved`= 1,`notification`= 1 WHERE id = '$acceptuser'";
-    $result1 = mysqli_query($conn, $sql1);
-    header("location:?route=candidat");
-    echo '<script>alert("accepter avec succes")</script>';
 }
 
 else if(isset($_GET['inaccept'])){
@@ -37,6 +71,10 @@ else if(isset($_GET['inaccept'])){
     header("location:?route=candidat");
     echo '<script>alert("refuser avec succes")</script>';
 }
+
+
+
+
 
 ?>
 
@@ -186,7 +224,7 @@ else if(isset($_GET['inaccept'])){
                             </td>
                             <td>
                                 <?php if($row['approved'] == NULL){ ?>
-                                <a href="?route=candidat&accept=<?php echo $row['idstatus'] ?>"
+                                <a href="?route=candidat&name=<?= $row['name'] ?>&email=<?= $row['email'] ?>&accept=<?php echo $row['idstatus'] ?>"
                                     style="color : white; width : 100%; background-color: green; padding : 5px 10px; border-radius :3px ">
                                     Accepter</a>
                                 <a href="?route=candidat&inaccept=<?php echo $row['idstatus'] ?>"
