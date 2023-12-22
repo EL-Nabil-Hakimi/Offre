@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 use App\Models\UserModel;
 
@@ -54,6 +55,14 @@ class HomeController
     }
     public function candidat_profile(){
         require(__DIR__ .'../../../view/candidat/profile.php');    
+    }
+    public function page_edit(){
+        
+        require(__DIR__ .'/../../view/recruteur/page_edit.php');    
+    }
+    public function edit_offre(){
+                
+        require(__DIR__ .'/../../view/recruteur/edit_offre.php');    
     }
 
 

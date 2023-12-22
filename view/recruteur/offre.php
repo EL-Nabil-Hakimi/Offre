@@ -195,6 +195,14 @@ else{
                                         Supprimer
                                     </p>
                                 </a>
+
+
+                                <a href="?route=page_edit&offreid=<?php echo $row['id'] ?>">
+                                    <p class="fw-bold mb-4 f_name"
+                                        style="font-size : 15px; width : 10vw; color : green; cursor : pointer">
+                                        Modifier
+                                    </p>
+                                </a>    
                             </td>
                             <?php }?>
 

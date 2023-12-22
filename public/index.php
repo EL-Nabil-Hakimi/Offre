@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\Add_offreController;
+use App\Controllers\Edit_offreController;
 
 $route = isset($_GET['route']) ? $_GET['route'] : 'home';
 
@@ -66,6 +67,14 @@ switch ($route) {
     case 'candidat_profile':
         $controller = new HomeController();
         $controller->candidat_profile();    
+        break;
+    case 'page_edit':
+        $controller = new HomeController();
+        $controller->page_edit();
+        break;
+    case 'edit_offre':
+        $controller = new Edit_offreController();
+        $controller->edit_offre();
         break;
 
         // Add mor
