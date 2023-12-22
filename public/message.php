@@ -241,10 +241,9 @@
 
 
                                         <div style="line-height: 24px">
-
                                             Nous sommes ravis de vous informer que votre demande a été acceptée avec succès. Nous sommes impatients de collaborer avec vous et de répondre à vos besoins de la meilleure manière possible.
 
-                                                        </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

@@ -63,6 +63,10 @@ switch ($route) {
         $controller = new HomeController();
         $controller->Candidat_notification();    
         break;
+    case 'candidat_profile':
+        $controller = new HomeController();
+        $controller->candidat_profile();    
+        break;
 
         // Add mor
     // Add more cases for other routes as needed

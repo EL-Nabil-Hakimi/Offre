@@ -52,6 +52,9 @@ class HomeController
     public function Candidat_search_result(){
         require(__DIR__ .'../../../view/candidat/search.php');      
     }
+    public function candidat_profile(){
+        require(__DIR__ .'../../../view/candidat/profile.php');    
+    }
 
 
 }

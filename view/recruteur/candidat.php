@@ -27,7 +27,7 @@ if(isset($_GET["msg"])){
 
 }
 
-if(isset($_GET['accept']) && isset($_GET['email']) && isset($_GET['name']) ){
+if(isset($_GET['accept']) && isset($_GET['email']) && isset($_GET['name'])){
 
     $name = $_GET['name'];
     $email = $_GET['email'];
@@ -43,7 +43,11 @@ if(isset($_GET['accept']) && isset($_GET['email']) && isset($_GET['name']) ){
             $mail->setFrom('nabilelhakimi2023@gmail.com', 'Nabil El Hakimi');
             $mail->addAddress($email);          
             $mail->isHTML(true);
-            $mail->Subject = 'Congratulation Vous Avez Accepter Chez Nous';
+            $mail->Subject = 'Mr: '.$name.', Congratulation Vous Avez Accepter Chez Nous';
+
+            session_start();
+            $_SESSION['name'] = $name;
+
             $mail->Body=file_get_contents("message.php");
 
             $mail->send();

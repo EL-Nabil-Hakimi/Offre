@@ -1,10 +1,10 @@
 <?php 
 use App\Models\Database;
-  
+
 
   $connexion = Database::getInstance();
   $conn = $connexion->getConnection();
-
+  
   session_start();
   if(isset($_SESSION["iduser"])){    
       $iduser = $_SESSION["iduser"];
@@ -13,32 +13,9 @@ use App\Models\Database;
       header("Location:?route=login");
   }
 
-  if(isset($_GET['titre'])){
-    $titre = $_GET["titre"];
-    $sql = "SELECT * FROM offre WHERE titre LIKE '%$titre%' ORDER BY id DESC";
-    $result = mysqli_query($conn, $sql);
-  }
-  else{
-  $sql = "SELECT * FROM offre ORDER BY id DESC";
-  $result = mysqli_query($conn, $sql);}
 
 
-  if(isset($_GET['apply'])){
-        $apply = $_GET['apply'];
-        
-        $sqlcheck = "SELECT * FROM `status` WHERE userid = $iduser AND offreid = $apply ";
-        $resultcheck = mysqli_query($conn, $sqlcheck);
-    if(mysqli_num_rows($resultcheck) == 0){
-        $sql1 = "INSERT INTO `status`(`userid`, `offreid`) VALUES ('$iduser','$apply')";
-        $result1 = mysqli_query($conn, $sql1);
-        echo "<script>alert('Votre Demande a éte envoyer avec succes')</script>";
-    }
-    else{
-        echo "<script>alert('Votre Demande a éte deja envoyer')</script>";
-    }
-  }
-  
-
+ 
 ?>
 
 
@@ -64,12 +41,14 @@ use App\Models\Database;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="assets/styles/stylepdf.css">
+
+
+  
 </head>
 
 <body>
     <header>
-
-
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
                 <!-- Brand/logo -->
@@ -93,11 +72,6 @@ use App\Models\Database;
                         <li class="nav-item">
                             <a class="nav-link" href="?route=candidat_notification">Notification</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="?route=candidat_profile">Profile</a>
-                        </li>
-
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -124,58 +98,34 @@ use App\Models\Database;
 
 
 
-    <section class="search">
-        <h2>Find Your Dream Job</h2>
-        <div style="display : flex ; justify-content :center">
-            <div class="form-group mb-2">
-                <input type="text" id="titre" placeholder="Search By Title">
-            </div>
-            <div class="form-group mb-2">
-                <input type="text" id="paye" placeholder="Search By Company">
-            </div>
-            <button class="btn btn-primary mb-2" onclick="search()">Search</button>
-        </div>
-    </section>
+    <section id="secPDF"> 
+           
+   <div id="pdf">
 
-    <section class="light">
-        <h2 class="text-center py-3">Latest Job Listings</h2>
-        <div class="container py-2" id="MyDives">
-
-            <?php while($row = mysqli_fetch_assoc($result) ){?>
-            <article class="postcard light green">
-                <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="<?php echo $row['image']?>" alt="Image Title" />
-                </a>
-                <div class="postcard__text t-dark">
-                    <h3 class="postcard__title green"><a href="#"><?php echo $row['titre']?></a></h3>
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i><?php echo $row['date']?>
-                        </time>
-                    </div>
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt"><?php echo $row['description']?></div>
-                    <ul class="postcard__tagbox">
-                        <li class="tag__item"><i class="fas fa-tag mr-2"></i><?php echo $row['paye']?></li>
-                        <li class="tag__item play green">
-                            <a href="?route=candidat_page&apply=<?php echo $row['id']?>"><i class="fas fa-play mr-2"></i>APPLY
-                                NOW</a>
-                        </li>
-                    </ul>
+            <div id="imgandname">
+                <div><img src="uploads/IMG-6583142544b382.25150684Business-Ideas-for-Women-Entrepreneurs.png" alt=""></div>
+                <div>
+                    <h1>Layla El Ouali</h1>
                 </div>
-            </article>
-
-
-
-            <?php
-            }
-            ?>
-
+            </div>
+            <div id="info">
+                    <h5>Profile : <span>DEV </span></h5>
+                    <h5>Telephone : </h5>
+                    <h5>Adresse : </h5>
+                    <h5>Pays : </h5>
+                    <h5>Situation Familiale : </h5>
+                    <h5>Date Naissance : </h5>
+                    <h5>Langue Français : </h5>
+                    <h5>Langue Anglais: </h5>
+                    <h5>Langue Arabe : </h5>
+            </div>
+           
+        </div>
+            <div id="btn">
+                <button>Ajouter Mes Information</button>
+                <button onclick="generatePDF()">Telecharger Le PDF</button>
+            </div>
     </section>
-
-
-
-
     <footer>
         <p>© 2023 JobEase </p>
     </footer>
@@ -183,7 +133,25 @@ use App\Models\Database;
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="assets/js/search.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 
+<script>        
+
+function generatePDF() {
+
+        var nom_fichier = "Inforamation Personnel";
+        var element = document.getElementById('pdf');
+        var opt = {
+            margin: 0,
+            filename: `${nom_fichier}.pdf`,
+            image: { type: 'png', quality: 1 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+         html2pdf().set(opt).from(element).save();
+    };
+
+</script>
 </html>
